@@ -1,0 +1,58 @@
+import by.teachmeskills.robot.hands.SamsungHand;
+import by.teachmeskills.robot.hands.SonyHand;
+import by.teachmeskills.robot.heads.SamsungHead;
+import by.teachmeskills.robot.heads.SonyHead;
+import by.teachmeskills.robot.heads.ToshibaHead;
+import by.teachmeskills.robot.legs.SamsungLeg;
+import by.teachmeskills.robot.legs.ToshibaLeg;
+
+public class Run {
+    public static void main(String[] args) {
+        /*
+        Создать по 3 реализации(Sony, Toshiba, Samsung) каждой запчасти(IHead, IHand, ILeg)
+        Класс SonyHead является примером реализацией головы от Sony.
+        Создайте 3 робота с разными комплектующими.
+        Например у робота голова и нога от Sony а, рука от Samsung.
+        У всех роботов вызовите метод action.
+        Среди 3-х роботов найдите самого дорогого.
+        */
+        SamsungHead samsungHead = new SamsungHead(158);
+
+        SonyHead sonyHead = new SonyHead(150);
+        ToshibaHead toshibaHead = new ToshibaHead(145);
+        SamsungHand samsungHand = new SamsungHand(70);
+        SonyHand sonyHand = new SonyHand(65);
+        SamsungLeg samsungLeg = new SamsungLeg(90);
+        ToshibaLeg toshibaLeg = new ToshibaLeg(85);
+
+        Robot robot1 = new Robot(samsungHead, sonyHand, toshibaLeg);
+        Robot robot2 = new Robot(sonyHead, sonyHand, samsungLeg);
+        Robot robot3 = new Robot(toshibaHead, samsungHand, samsungLeg);
+        robot1.action();
+        System.out.println();
+        int[] price = new int[3];
+        price[0] = robot1.getPrice();
+        robot1.setHead(sonyHead);
+        robot1.setHand(sonyHand);
+        robot1.setLeg(samsungLeg);
+        robot1.action();
+        System.out.println();
+        price[1] = robot1.getPrice();
+        robot1.setHead(toshibaHead);
+        robot1.setHand(samsungHand);
+        robot1.setLeg(samsungLeg);
+        robot1.action();
+        System.out.println();
+        price[2] = robot1.getPrice();
+        int max = price[0];
+        int index = 1;
+        for (int i = 1; i < price.length; i++) {
+            if (max <= price[i]) {
+                max = price[i];
+                index = i + 1;
+            }
+        }
+        System.out.println(index + " робот самый дорогой, его цена: " + max);
+
+    }
+}
